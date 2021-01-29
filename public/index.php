@@ -6,14 +6,13 @@ use Slim\Factory\AppFactory;
 
 $app = AppFactory::create();
 
-$app->setBasePath("/ospromaker/public/index.php");
+$basePath = str_replace('/' . basename(__FILE__), '', $_SERVER['SCRIPT_NAME']);
+$app = $app->setBasePath($basePath);
 
 $app->addErrorMiddleware(true, true, true);
 
+require '../app/helpers/config.php';
+require '../app/routes/router.php';
 
-$app->get('/', function ($request, $response) {
-    $response->getBody()->write("Hello dev!");
-    return $response;
-});
 
 $app->run();
