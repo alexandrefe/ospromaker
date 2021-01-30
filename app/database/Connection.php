@@ -18,7 +18,7 @@ class Connection
             return static::$pdo;
         }
 
-        $config = include  "../helpers/config.php";
+        $config =  require dirname(__FILE__, 2) . '/helpers/config.php';
 
         $local = $config['db']['host'];
         $db = $config['db']['dbname'];
