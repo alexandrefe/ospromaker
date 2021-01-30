@@ -1,0 +1,20 @@
+{% extends 'site/master.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% for user in users %}
+                    <ul>
+                        <li>Primeiro nome: {{ user.firstname }}</li>
+                        <li>Ultimo nome: {{ user.lastname }}</li>
+                        <li>Email: {{ user.email }}</li>
+                        <li>Cargo: {{ user.cargo }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

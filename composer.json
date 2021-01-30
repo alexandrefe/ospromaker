@@ -17,5 +17,8 @@
         "psr-4": {
             "app\\": "app"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
     }
 }

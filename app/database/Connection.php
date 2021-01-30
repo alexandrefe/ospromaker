@@ -18,11 +18,11 @@ class Connection
             return static::$pdo;
         }
 
-        $config =  require dirname(__FILE__, 2) . '/helpers/config.php';
+        $config =  require dirname(__FILE__, 2) . '/helpers/dbconfig.php';
 
-        $local = $config['db']['host'];
-        $db = $config['db']['dbname'];
-        $user = $config['db']['username'];
+        $local    = $config['db']['host'];
+        $db       = $config['db']['dbname'];
+        $user     = $config['db']['username'];
         $password = $config['db']['password'];
 
         try{
@@ -31,7 +31,8 @@ class Connection
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
-            ]);
+                ]
+            );
 
             return static::$pdo;
 

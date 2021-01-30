@@ -13,10 +13,10 @@ class HomeController extends BaseController
     {
         $user = new UserModel();
         $users = $user->findAll();
-        var_dump($users);
-        die();
+
         return $this->getTwig()->render($response, $this->setView('site/home'), [
-            'title' => 'Curso de Slim 4'
+            'title' => 'Curso de Slim 4',
+            'users'  => $users
         ]);
     }
 
