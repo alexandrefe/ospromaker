@@ -1,0 +1,33 @@
+{% extends 'site/master.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 pb-3">
+            <h2>Funcionários Cadastrados</h2>
+        </div>
+        <div class="col">
+            {% for user in users %}
+
+            <ul class="list-group mb-3">
+                <li class="list-group-item bg-info list-group-item-action">
+                    <div class="d-flex justify-content-between">
+                        <span>{{ user.id }}</span>
+                        <a href="#">
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-group-item list-group-item-action">Primeiro nome: {{ user.firstname }}</li>
+                <li class="list-group-item list-group-item-action">Ultimo nome: {{ user.lastname }}</li>
+                <li class="list-group-item list-group-item-action">Email: {{ user.email }}</li>
+                <li class="list-group-item list-group-item-action">Cargo: {{ user.cargo }}</li>
+            </ul>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

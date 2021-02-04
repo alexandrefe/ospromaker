@@ -1,6 +1,7 @@
 <?php
 
-use app\controllers\HomeController;
+use app\controllers\AdminController;
+use app\controllers\EmployeeController;
 
-
-$app->get('/', HomeController::class.':index');
+$app->get('/admin/', AdminController::class.':index')->setName('admin');
+$app->get('/admin/employee', EmployeeController::class.':index')->setName('admin.employee');
