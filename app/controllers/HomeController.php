@@ -12,19 +12,17 @@ class HomeController extends BaseController
     private $user;
 
     public function __construct() {
-        $this->userModel = new UserModel();
+        $this->user = new UserModel();
     }
 
     public function index($request, $response)
     {
 
-        $updated = $this->userModel->update([
-            'fields' => ['firstname' => 'Carlos', 'email' => 'joana@email.com'],
-            'where'  => ['id' => 3]
-        ]);
+        $deleted = $this->user->delete('id', 3);
 
-        dd($updated);
+        dd($deleted);
 
+        die();
 
         return $this->getTwig()->render($response, $this->setView('site/home'), [
             'title' => 'Curso de Slim 4',

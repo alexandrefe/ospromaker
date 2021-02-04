@@ -16,7 +16,7 @@ trait Update
             $updateFields .= "{$field} = :{$field}, ";
         }
 
-        $updateFields = rtrim($updateFields, ',');
+        $updateFields = rtrim($updateFields, ', ');
         $whereUpdate = array_keys($where);
         $bind = array_merge($fields, $where);
 
