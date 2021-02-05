@@ -16,13 +16,12 @@ class EmployeeController extends BaseController
         $this->users = new UserModel();
     }
 
-    public function index()
+    public function index($request, $response)
     {
         $users = $this->users->find(true);
 
         return $this->getTwig()->render($response, $this->setView('admin/employee'), [
             'title' => 'OSPROMAKER - Funcionários/Usuários',
-            'info' => 'Os usários também são funcionários!',
             'users' => $users
         ]);
     }

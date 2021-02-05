@@ -13,8 +13,11 @@ trait Template
     public function getTwig()
     {
         try {
+
             return Twig::create(DIR_VIEWS);
+
         } catch (Exception $e) {
+            
             var_dump($e->getMessage());
         }
     }

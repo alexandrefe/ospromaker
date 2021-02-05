@@ -5,7 +5,7 @@
 return [
     "db" => [
         'host'=> 'localhost',
-        'dbname' => 'slim4',
+        'dbname' => 'ospromaker',
         'username' => 'root',
         'password' => '',
     ],
