@@ -16,7 +16,11 @@
     "autoload": {
         "psr-4": {
             "app\\": "app"
-        }
+        },
+        "files": [
+            "app/helpers/config.php",
+            "app/helpers/redirect.php"
+        ]
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2"

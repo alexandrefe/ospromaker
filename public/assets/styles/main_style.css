@@ -1,0 +1,34 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto:wght@100&display=swap');
+
+/* Estilos gerais */
+
+body {
+	background-color: #F8F9FA;
+}
+
+.indigo {
+	background-color: #6610f2;
+}
+
+.vermelhodif-1 {
+	background-color: #E82B42;
+}
+
+.blue {
+	background-color: #0d6efd;
+}
+
+.title {
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+
+}
+.subtitle {
+	font-family: 'Roboto', sans-serif;
+	text-transform: capitalize;
+}
+
+.listagem li {
+	font-family: 'Montserrat', sans-serif;
+}

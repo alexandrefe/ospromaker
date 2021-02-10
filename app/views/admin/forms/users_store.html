@@ -1,0 +1,84 @@
+{% extends 'admin/master.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 pb-3">
+            <h3 class="title">Cadastre o usuário</h3>
+            <hr>
+        </div>
+        <div class="col-6">
+
+            <form method="post" action="/admin/users/store">
+
+                {% if messages['name']['message'] %}
+                <div class="input-group">
+                    <div class="alert alert-danger">
+                        {{messages['name']['message']}}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Nome</span>
+                    <input type="text" name="name" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
+                </div>
+
+                {% if messages['email']['message'] %}
+                <div class="input-group">
+                    <div class="alert alert-danger">
+                        {{messages['email']['message']}}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon2">Email</span>
+                    <input type="email" name="email" class="form-control" placeholder="" aria-label="Email" aria-describedby="basic-addon2">
+                </div>
+
+                {% if messages['cpf']['message'] %}
+                <div class="input-group">
+                    <div class="alert alert-danger">
+                        {{messages['cpf']['message']}}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">CPF</span>
+                    <input type="text" name="cpf" class="form-control" placeholder="" aria-label="CPF" aria-describedby="basic-addon3">
+                </div>
+
+                {% if messages['position']['message'] %}
+                <div class="input-group">
+                    <div class="alert alert-danger">
+                        {{messages['position']['message']}}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon4">Cargo</span>
+                    <input type="text" name="position" class="form-control" placeholder="" aria-label="Position" aria-describedby="basic-addon4">
+                </div>
+
+                {% if messages['password']['message'] %}
+                <div class="input-group">
+                    <div class="alert alert-danger">
+                        {{messages['password']['message']}}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon5">Password</span>
+                    <input type="password" name="password" class="form-control" placeholder="" aria-label="Password" aria-describedby="basic-addon5">
+                </div>
+
+
+                <button type="submit" class="btn btn-success"> Cadastrar </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
