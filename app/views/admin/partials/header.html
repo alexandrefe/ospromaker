@@ -22,7 +22,16 @@
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	      <div class="navbar-nav">
-	        <a class="nav-link text-light" href="/admin">Início</a>
+			  <li class="nav-item dropdown">
+				  <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  Relatório
+				  </a>
+				  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					  <li><a class="dropdown-item" href="#">Relatório Geral</a></li>
+					  <li><a class="dropdown-item" href="#">Imprimir Relatório</a></li>
+					  <li><a class="dropdown-item" href="#">Exporta para Excel</a></li>
+				  </ul>
+			  </li>
 	         <li class="nav-item dropdown">
 	          <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	            Ordem de Serviços
@@ -32,14 +41,22 @@
 	            <li><a class="dropdown-item" href="#">Cadastrar Ordem de Serviço</a></li>
 	          </ul>
 	        </li>
-	        <a class="nav-link text-light" href="#">Clientes</a>
+			  <li class="nav-item dropdown">
+				  <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  Clientes
+				  </a>
+				  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					  <li><a class="dropdown-item" href="#">Listar Clientes</a></li>
+					  <li><a class="dropdown-item" href="#">Cadastrar Clientes</a></li>
+				  </ul>
+			  </li>
 	         <li class="nav-item dropdown">
 	          <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	            Usuários
 	          </a>
 	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 	            <li><a class="dropdown-item" href="/admin/users">Listar Usuários</a></li>
-	            <li><a class="dropdown-item" href="/admin/users/store">Cadastrar Usuários</a></li>
+	            <li><a class="dropdown-item" href="/admin/users/storeform">Cadastrar Usuários</a></li>
 	          </ul>
 	        </li>
 	      </div>

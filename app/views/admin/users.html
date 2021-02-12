@@ -5,53 +5,74 @@
     <div class="row mt-5">
         <div class="col-12 pb-3">
             <h3 class="title">Usuários Cadastrados</h3>
-
-            {{ message['message'] }}
-
             <hr>
         </div>
-        <div class="col-6">
-            {% for user in users %}
-            <ul class="list-group listagem mb-3">
-                <li class="list-group-item text-light bg-dark">
-                    <div class="d-flex justify-content-between">
-                        <div class="me-auto p-1">
-                            <span></span>
-                        </div>
-                        <div class="p-1">
-                            <a href="#">
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
-                            </a>
-                        </div>
-                        <div class="p-1">
-                            <a href="/admin/users/update">
-                                <button class="btn btn-warning btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Editar</button>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item list-group-item-action"><strong>Funcionário</strong>: {{ user.name }}</li>
-                <li class="list-group-item list-group-item-action"><strong>E-mail</strong>: {{ user.email }}</li>
-                <li class="list-group-item list-group-item-action"><strong>CPF</strong>: {{ user.cpf }}</li>
-                <li class="list-group-item list-group-item-action"><strong>Cargo</strong>: {{ user.position }}</li>
-                <li class="list-group-item list-group-item-action"><strong>Senha</strong>: {{ user.password }}</li>
-            </ul>
-
-            {% endfor %}
+        <div class="col-12 pb-4">
+            {{ messages['message']['message']|message(messages['message']['alert'])|raw }}
         </div>
 
-        <div class="col">
-            <div>
-                <nav class="navbar navbar-light bg-light">
-                  <div class="container-fluid">
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Pesquise por um usuário" aria-label="Search">
-                      <button class="btn btn-dark text-light" type="submit">Pesquisar</button>
-                    </form>
-                  </div>
-                </nav>
+        <div class="d-flex flex-row justify-content-between">
+
+            <div class="col-6">
+                {% for user in users %}
+                <ul class="list-group listagem mb-2">
+                    <li class="list-group-item text-light bg-gradient bg-dark">
+                        <div class="d-flex justify-content-between">
+                            <div class="me-auto p-1">
+                                <span></span>
+                            </div>
+                            <div class="p-1">
+                                <a href="/admin/users/delete/{{ user.id }}">
+                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
+                                </a>
+                            </div>
+                            <div class="p-1">
+                                <a href="/admin/users/updateform/{{ user.id }}">
+                                    <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit">&nbsp;</i>Editar</button>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item list-group-item-action"><strong>Funcionário</strong>: {{ user.name }}</li>
+                    <li class="list-group-item list-group-item-action"><strong>E-mail</strong>: {{ user.email }}</li>
+                    <li class="list-group-item list-group-item-action"><strong>CPF</strong>: {{ user.cpf }}</li>
+                    <li class="list-group-item list-group-item-action"><strong>Cargo</strong>: {{ user.position }}</li>
+                </ul>
+
+                {% endfor %}
             </div>
+
+            <div>
+
+                <div class="col">
+                    <div>
+                        <nav class="navbar navbar-light bg-light">
+
+                            <a href="/admin/users/storeform">
+                                <button class="btn bg-gradient btn-dark">Cadastrar Usuário</button>
+                            </a>
+
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div>
+                        <nav class="navbar navbar-light bg-light">
+
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Pesquise por um usuário" aria-label="Search"/>
+                                <button class="btn bg-gradient btn-primary px-4"><i class="fas fa-search">&nbsp;</i></button>
+                            </form>
+
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
+
     </div>
 </div>
 {% endblock %}

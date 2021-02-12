@@ -8,5 +8,6 @@ return [
         'dbname' => 'ospromaker',
         'username' => 'root',
         'password' => '',
+        'charset' => 'utf8'
     ],
 ];

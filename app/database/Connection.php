@@ -24,10 +24,11 @@ class Connection
         $db       = $config['db']['dbname'];
         $user     = $config['db']['username'];
         $password = $config['db']['password'];
+        $charset  = $config['db']['charset'];
 
         try{
 
-            static::$pdo = new PDO("mysql:host={$local}; dbname={$db}", "{$user}", "$password",
+            static::$pdo = new PDO("mysql:host={$local}; dbname={$db}; charset={$charset}", "{$user}", "$password",
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ

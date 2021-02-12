@@ -12,31 +12,40 @@
         </div>
         <div class="col-6">
 
-            <form method="post" action="/admin/users/update">
+            <form method="post" action="/admin/users/update/{{user.id}}">
 
+                <input type="hidden" name="_METHOD" value="PUT" />
+
+                <div class="input-group">
+                    {{ messages['name']['message']|message(messages['name']['alert'])|raw }}
+                </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Nome</span>
-                    <input type="text" name="name" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
+                    <input type="text" name="name" value="{{ user.name }}" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
                 </div>
 
+                <div class="input-group">
+                    {{ messages['email']['message']|message(messages['email']['alert'])|raw }}
+                </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon2">Email</span>
-                    <input type="email" name="email" class="form-control" placeholder="" aria-label="Email" aria-describedby="basic-addon2">
+                    <input type="email" name="email" value="{{ user.email }}" class="form-control" placeholder="" aria-label="Email" aria-describedby="basic-addon2">
                 </div>
 
+                <div class="input-group">
+                    {{ messages['cpf']['message']|message(messages['cpf']['alert'])|raw }}
+                </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3">CPF</span>
-                    <input type="text" name="CPF" class="form-control" placeholder="" aria-label="CPF" aria-describedby="basic-addon3">
+                    <input type="text" name="cpf" value="{{ user.cpf }}"  class="form-control" placeholder="" aria-label="CPF" aria-describedby="basic-addon3">
                 </div>
 
+                <div class="input-group">
+                    {{ messages['position']['message']|message(messages['position']['alert'])|raw }}
+                </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon4">Cargo</span>
-                    <input type="text" name="position" class="form-control" placeholder="" aria-label="Position" aria-describedby="basic-addon4">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon5">Password</span>
-                    <input type="password" name="password" class="form-control" placeholder="" aria-label="Password" aria-describedby="basic-addon5">
+                    <input type="text" name="position" value="{{ user.position }}"  class="form-control" placeholder="" aria-label="Position" aria-describedby="basic-addon4">
                 </div>
 
                 <button type="submit" class="btn btn-success"> Atualizar </button>

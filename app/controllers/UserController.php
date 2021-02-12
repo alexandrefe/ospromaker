@@ -11,22 +11,25 @@ use app\database\models\UserModel;
 class UserController extends BaseController
 {
 
-    private $users;
+    private $user;
     private $validate;
 
     public function __construct()
     {
-        $this->users = new UserModel();
+        $this->user = new UserModel();
         $this->validate = new Validate();
     }
 
     public function index($request, $response)
     {
-        $users = $this->users->find(true);
+        $messages = Flash::getAll();
+
+        $users = $this->user->find(true);
 
         return $this->getTwig()->render($response, $this->setView('admin/users'), [
             'title' => 'OSPROMAKER - Funcionários/Usuários',
             'users' => $users,
+            'messages' => $messages,
         ]);
     }
 
@@ -43,34 +46,83 @@ class UserController extends BaseController
     public function store($request, $response, $args)
     {
         $values = [
-            'email'=> $_POST['email'],
-            'name' => $_POST['name']
+            'name' => filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
+            'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING),
+            'cpf' => filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING),
+            'position' => filter_input(INPUT_POST, 'position', FILTER_SANITIZE_STRING),
+            'password' => password_hash(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING), PASSWORD_DEFAULT),
         ];
 
-        // Como passar mais de um campo para verificar se já existe ?
-
-        $this->validate->required(['name', 'email', 'cpf', 'position', 'password'])->exists($this->users, ['name', 'email'], $values);
+        $this->validate->required(['name', 'email', 'cpf', 'position', 'password'])->exists($this->user, ['email', 'cpf'], $values);
         $errors = $this->validate->getErrors();
 
         if($errors) {
             Flash::flashes($errors);
+            return redirect($response, '/admin/users/storeform');
+        }
+
+        $created = $this->user->create($values);
+
+        if($created) {
+            Flash::set('message', "Usuário {$values['name']}, cadastrado com sucesso!", 'success');
+            return redirect($response, '/admin/users');
+        } else {
+            Flash::set('message', 'Ocorreu um erro ao cadastrar!', 'danger');
             return redirect($response, '/admin/users/store');
         }
+
+
+        return $response;
 
     }
 
     public function showUpdateForm($request, $response, $args)
     {
-        return $this->getTwig()->render($response, $this->setView('admin/forms/users_store'), [
+        $id = filter_var($args['id'], FILTER_SANITIZE_NUMBER_INT);
+
+        $user = $this->user->findBy('id', $id);
+
+        if(!$user) {
+            Flash::set('message', 'Usuário não existe!', 'danger');
+            return redirect($response, '/admin/users');
+        }
+
+        $messages = Flash::getAll();
+
+        return $this->getTwig()->render($response, $this->setView('admin/forms/users_update'), [
             'title' => 'OSPROMAKER - Cadastro de Usuários',
+            'user' => $user,
+            'messages' => $messages,
         ]);
     }
 
     public function update($request, $response, $args)
     {
-        return $this->getTwig()->render($response, $this->setView('admin/forms/users_update'), [
-            'title' => 'OSPROMAKER - Ataulize Cadastro',
-        ]);
+        $name     = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $email    = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+        $cpf      = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
+        $position = filter_input(INPUT_POST, 'position', FILTER_SANITIZE_STRING);
+        $id       = filter_var($args['id'], FILTER_SANITIZE_NUMBER_INT);
+
+
+        $this->validate->required(['name', 'email', 'cpf', 'position']);
+        $errors = $this->validate->getErrors();
+
+        if($errors) {
+            Flash::flashes($errors);
+            return redirect($response, '/admin/users/updateform/' . $id);
+        }
+
+        $updated = $this->user->update(['fields' => ['name' => $name, 'email' => $email, 'cpf' => $cpf, 'position' => $position], 'where' => ['id' => $id]]);
+
+        if($updated) {
+            Flash::set('message', "Usuário(a) {$name}, atualizado com sucesso!", 'success');
+            return redirect($response, '/admin/users');
+        } else {
+            Flash::set('message', 'Ocorreu algum erro ao atualizar!', 'danger');
+            return redirect($response, '/admin/users');
+        }
+
     }
 
     public function destroy($request, $response, $args)
