@@ -127,6 +127,24 @@ class UserController extends BaseController
 
     public function destroy($request, $response, $args)
     {
+        $id = filter_var($args['id'], FILTER_SANITIZE_NUMBER_INT);
+
+        $user = $this->user->findBy('id', $id);
+
+        if(!$user) {
+            Flash::set('message', 'Usuário não existe!', 'danger');
+            return redirect($response, '/admin/users');
+        }
+
+        $deleted = $this->user->delete('id', $id);
+
+        if ($deleted) {
+            Flash::set('message', "Usuário(a), deletado com sucesso!", 'success');
+            return redirect($response, '/admin/users');
+        } else {
+            Flash::set('message', "Ocorreu um erro ao deletar!", 'success');
+            return redirect($response, '/admin/users', 'danger');
+        }
 
     }
 

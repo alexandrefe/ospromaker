@@ -16,7 +16,7 @@ $app->get('/admin/users/storeform', UserController::class.':showStoreForm');
 $app->post('/admin/users/store', UserController::class.':store');
 $app->get('/admin/users/updateform/{id}', UserController::class.':showUpdateForm');
 $app->put('/admin/users/update/{id}', UserController::class.':update');
-$app->delete('/admin/users/destroy', UserController::class.':destroy');
+$app->delete('/admin/users/destroy/{id}', UserController::class.':destroy');
 
 
 
