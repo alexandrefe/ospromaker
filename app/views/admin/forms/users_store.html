@@ -2,10 +2,17 @@
 
 {% block content %}
 <div class="container">
-    <div class="row mt-5">
-        <div class="col-12 pb-3">
+    <div class="row flex-column mt-5">
+        <div class="col-12 pb-1">
             <h3 class="title">Cadastre o usuário</h3>
             <hr>
+        </div>
+        <div class="col-12 pb-4">
+            <div class="rounded bg-info p-1 pt-2 pb-2">
+                <a href="/admin/users" class="badge badge-danger" style="text-decoration: none;">
+                   <i class="fas fa-arrow-left"></i>&nbsp;<span>Voltar</span>
+                </a>
+            </div>
         </div>
         <div class="col-6">
 
@@ -15,7 +22,7 @@
                     {{ messages['name']['message']|message(messages['name']['alert'])|raw }}
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Nome</span>
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon1">Nome</span>
                     <input type="text" name="name" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
                 </div>
 
@@ -23,7 +30,7 @@
                     {{ messages['email']['message']|message(messages['email']['alert'])|raw }}
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon2">Email</span>
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon2">Email</span>
                     <input type="email" name="email" class="form-control" placeholder="" aria-label="Email" aria-describedby="basic-addon2">
                 </div>
 
@@ -31,7 +38,7 @@
                     {{ messages['cpf']['message']|message(messages['cpf']['alert'])|raw }}
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3">CPF</span>
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon3">CPF</span>
                     <input type="text" name="cpf" class="form-control" placeholder="" aria-label="CPF" aria-describedby="basic-addon3">
                 </div>
 
@@ -39,7 +46,7 @@
                     {{ messages['position']['message']|message(messages['position']['alert'])|raw }}
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon4">Cargo</span>
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon4">Cargo</span>
                     <input type="text" name="position" class="form-control" placeholder="" aria-label="Position" aria-describedby="basic-addon4">
                 </div>
 
@@ -47,7 +54,7 @@
                     {{ messages['password']['message']|message(messages['password']['alert'])|raw }}
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon5">Password</span>
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon5">Password</span>
                     <input type="password" name="password" class="form-control" placeholder="" aria-label="Password" aria-describedby="basic-addon5">
                 </div>
 
