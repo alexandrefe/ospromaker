@@ -6,6 +6,8 @@ use app\controllers\AdminController;
 use app\controllers\UserController;
 use app\controllers\ErrorController;
 
+use Slim\Routing\RouteCollectorProxy;
+
 require dirname(__FILE__, 2) . '/middlewares/logged.php';
 
 $app->get('/', HomeController::class .':index');
