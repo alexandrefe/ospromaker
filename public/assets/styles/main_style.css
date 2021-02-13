@@ -32,3 +32,18 @@ body {
 .listagem li {
 	font-family: 'Montserrat', sans-serif;
 }
+
+/** Tela de Login **/
+div.login {
+	margin-top: 100px;
+}
+
+div.login input {
+	text-align: center;
+}
+
+div.login label {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+}

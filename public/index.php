@@ -6,6 +6,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Slim\Factory\AppFactory;
 use Slim\Middleware\MethodOverrideMiddleware;
+use Slim\Routing\RouteCollectorProxy;
 
 $app = AppFactory::create();
 

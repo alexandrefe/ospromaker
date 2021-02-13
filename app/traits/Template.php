@@ -3,6 +3,7 @@
 namespace app\traits;
 
 use app\classes\TwigFilters;
+use app\classes\TwigGlobal;
 use Exception;
 use Slim\Views\Twig;
 
@@ -17,6 +18,9 @@ trait Template
 
             $twig =  Twig::create(DIR_VIEWS);
             $twig->addExtension(new TwigFilters);
+
+            TwigGlobal::load($twig);
+
             return $twig;
 
         } catch (Exception $e) {

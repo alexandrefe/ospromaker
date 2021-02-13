@@ -15,7 +15,7 @@
 
 <div class="pb-5">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <div class="container-fluid">
+	  <div class="container">
 	    <a class="navbar-brand text-light" href="/admin">OSPROMAKER</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
@@ -61,6 +61,19 @@
 	        </li>
 	      </div>
 	    </div>
+
+		  <div class="btn-group dropdown">
+			  <button type="button" class="btn btn-light text-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				  {% if logged_in %}
+				  <i class="fas fa-id-card-alt"></i>&nbsp;Usuário Logado: {{ user.name }}
+				  {% endif %}
+			  </button>
+			  <ul class="dropdown-menu">
+				  <li><a class="dropdown-item" href="/logout">Deslogar</a></li>
+			  </ul>
+		  </div>
+	  	</div>
+
 	  </div>
 	</nav>
 </div>

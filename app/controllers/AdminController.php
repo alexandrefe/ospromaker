@@ -13,7 +13,6 @@ class AdminController extends BaseController
     {
         return $this->getTwig()->render($response, $this->setView('admin/home'), [
             'title' => 'OSPROMAKER',
-            'info' => 'Seja bem vindo de volta!'
         ]);
     }
 }

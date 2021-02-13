@@ -20,8 +20,6 @@ class Validate
         return $this;
     }
 
-    // Tentar fazer a existe suporta array de campos e values para verificar se existe no campo
-    // exemplo nome e email
     public function exists($model, array $fields, array $values)
     {
         foreach ($fields as $field) {
@@ -34,6 +32,14 @@ class Validate
         }
 
         return $this;
+    }
+
+    public function email($email)
+    {
+        $validated = filter_Var($email, FILTER_VALIDATE_EMAIL);
+        if(!$validated) {
+            $this->errors['email'] = 'Email inválido';
+        }
     }
 
     public function getErrors()

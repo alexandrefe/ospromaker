@@ -1,0 +1,55 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/assets/libs/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/main_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+
+    <title>{{ title }}</title>
+</head>
+<body>
+
+            <div class="container">
+
+                <div class="login row flex-column align-content-center justify-content-center">
+
+                    <div class="col-4 text-center">
+                        <div>
+                            <img width="200" src="/assets/images/suport-bg.png">
+                        </div>
+                        <form action="/login" method="post" class="pt-3">
+                            {% if  messages['email']['message']|message(messages['email']['alert']) %}
+                            <div class="pb-3 pt-3">
+                                {{ messages['email']['message']|message(messages['email']['alert'])|raw }}
+                            </div>
+                            {% endif %}
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Endereço de Email</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            {% if  messages['password']['message']|message(messages['password']['alert']) %}
+                            <div class="pt-3 mb-3">
+                                {{ messages['password']['message']|message(messages['password']['alert'])|raw }}
+                            </div>
+                            {% endif %}
+                            <div class="pb-3">
+                                <label for="exampleInputPassword1" class="form-label">Senha</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                            </div>
+
+                            <button type="submit" class="btn px-5 btn-dark"><i class="fas fa-sign-in-alt"></i>&nbsp;Entrar</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+<script src="/assets/libs/bootstrap.bundle.min.js"></script>
+</body>
+</html>
