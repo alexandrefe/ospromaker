@@ -17,13 +17,13 @@ $app->post('/login', LoginController::class.':store');
 $app->get('/logout', LoginController::class.':destroy');
 
 $app->group('/admin', function(RouteCollectorProxy $group) {
-    $group->get('/', AdminController::class . ':index');
-    $group->get('/users', UserController::class . ':index');
-    $group->get('/users/storeform', UserController::class . ':showStoreForm');
-    $group->post('/users/store', UserController::class . ':store');
-    $group->get('/users/updateform/{id}', UserController::class . ':showUpdateForm');
-    $group->put('/users/update/{id}', UserController::class . ':update');
-    $group->delete('/users/destroy/{id}', UserController::class . ':destroy');
+    $group->get('/', AdminController::class .':index');
+    $group->get('/users', UserController::class .':index');
+    $group->get('/users/storeform', UserController::class .':showStoreForm');
+    $group->post('/users/store', UserController::class .':store');
+    $group->get('/users/updateform/{id}', UserController::class.':showUpdateForm');
+    $group->put('/users/update/{id}', UserController::class.':update');
+    $group->delete('/users/destroy/{id}', UserController::class.':destroy');
 })->add($logged);
 
 

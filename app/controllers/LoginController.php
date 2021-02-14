@@ -47,7 +47,7 @@ class LoginController extends BaseController
         $logged = $this->login->login($email, $password);
 
         if($logged) {
-            return redirect($response, '/admin');
+            return redirect($response, '/admin/');
         } else {
             Flash::set('message', 'Ocorreu um erro ao logar!', 'danger');
             return redirect($response, '/login');

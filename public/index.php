@@ -9,6 +9,8 @@ use Slim\Middleware\MethodOverrideMiddleware;
 
 $app = AppFactory::create();
 
+require '../app/helpers/twig_variables.php';
+
 require '../app/routes/routes.php';
 
 $MethodOverrideMiddleware = new MethodOverrideMiddleware();
