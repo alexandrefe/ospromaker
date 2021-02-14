@@ -8,11 +8,11 @@ $logged = function (Request $request, RequestHandler $handler) {
     $response = $handler->handle($request);
     $existingContent = (string) $response->getBody();
 
-    $response = new Response();
-    $response->getBody()->write($existingContent);
+    $responseBody = new Response();
+    $responseBody->getBody()->write($existingContent);
 
     if(!isset($_SESSION['is_logged_in'])) {
-        return redirect($response, '/');
+        $response = redirect($response, '/');
     }
 
     return $response;

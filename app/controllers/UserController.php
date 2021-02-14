@@ -64,7 +64,6 @@ class UserController extends BaseController
         $created = $this->user->create($values);
         if($created) {
             Flash::set('message', "Usuário {$values['name']}, cadastrado com sucesso!", 'success');
-            var_dump($created);
             return redirect($response, '/admin/users');
         } else {
             Flash::set('message', 'Ocorreu um erro ao cadastrar!', 'danger');
