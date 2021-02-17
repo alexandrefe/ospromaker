@@ -1,0 +1,79 @@
+{% extends 'admin/master.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 pb-3">
+            <h3 class="title">Clientes Cadastrados</h3>
+            <hr>
+        </div>
+    </div>   
+</div>      
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-3">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Pesquise por um cliente" aria-label="Search"/>
+        <button class="btn bg btn-primary px-4"><i class="fas fa-search">&nbsp;</i></button>
+    </form>
+    </div>
+    <div class="col-3">
+      <a href="/admin/customers/showStoreForm">
+        <button class="btn bg-gradient btn-dark"><i class="fas fa-user-plus"></i>&nbsp;Cadastrar Usuário</button>
+      </a>
+    </div>
+    <div class="col-12">
+        {{ messages['message']['message']|message(messages['message']['alert'])|raw }}
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Info</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">RG</th>
+            <th scope="col">Nascimento</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Ações</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for customer in customers  %}
+          <tr>
+            <th scope="row">{{customer.id}}</th>
+            <th scope="row"><a href="#">
+              <i class="fas fa-plus"></i>&nbsp;Datalhes
+            </a></th>
+            <td>{{customer.name}}</td>
+            <td>{{customer.cpf}}</td>
+            <td>{{customer.rg}}</td>
+            <td>{{customer.birth_date}}</td>
+            <td>{{customer.address}}</td>
+            <td>{{customer.tel}}</td>
+            <td>{{customer.email}}</td>
+            <td><a href="#">
+              <button class="btn btn-warning btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
+            </a></td>
+            <td><a href="#">
+              <button class="btn btn-danger btn-sm"><i class="fas fa-user-edit">&nbsp;</i>Editar</button>
+            </a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
