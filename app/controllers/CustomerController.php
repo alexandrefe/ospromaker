@@ -14,8 +14,8 @@ class CustomerController extends BaseController
 
     public function __construct()
     {
-        $this->customer = new CustomerModel;
-        $this->validate = new Validate;
+        $this->customer = new CustomerModel();
+        $this->validate = new Validate();
     }
 
     public function index($request, $response)
@@ -31,7 +31,7 @@ class CustomerController extends BaseController
         ]);
     }
 
-    public function showStoreForm($request, $response)
+    public function showStoreForm($request, $response, $args)
     {
         $messages = Flash::getAll();
         
@@ -56,6 +56,11 @@ class CustomerController extends BaseController
        $this->validate->required(['name', 'cpf', 'rg', 'birth_date', 'address', 'tel', 'email'])->exists($this->customer, ['name', 'cpf'], $values);
        $errors = $this->validate->getErrors();
 
+       if($errors) {
+         Flash::flashes($errors);
+         return redirect($response, '/admin/customers/storeform');
+       }
+
        $created = $this->customer->create($values);
 
        if($created) {
@@ -63,10 +68,32 @@ class CustomerController extends BaseController
            return redirect($response, '/admin/customers');
        } else {
            Flash::set('message', 'Ocorreu um erro ao cadastrar!', 'danger');
-           return redirect($response, '/admin/customers/showStoreForm');
+           return redirect($response, '/admin/customers/storeform');
        }
 
        return $response;
+    }
+
+    public function destroy($request, $response, $args)
+    {
+        $id = filter_var($args['id'], FILTER_SANITIZE_NUMBER_INT);
+
+        $customer = $this->customer->findBy('id', $id);
+
+        if(!$customer) {
+            Flash::set('message', 'Cliente não existe!', 'danger');
+            return redirect($response, '/admin/customers');
+        }
+
+        $deleted = $this->customer->delete('id', $id);
+
+        if ($deleted) {
+            Flash::set('message', "Cliente, deletado com sucesso!", 'success');
+            return redirect($response, '/admin/customers', 'sucess');
+        } else {
+            Flash::set('message', "Ocorreu um erro ao deletar!", 'success');
+            return redirect($response, '/admin/customers', 'danger');
+        }
     }
 
 }

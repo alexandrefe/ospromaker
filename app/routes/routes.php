@@ -21,8 +21,12 @@ $app->group('/admin', function (RouteCollectorProxy $group) {
     $group->get('/', AdminController::class .':index');
 
     $group->get('/customers', CustomerController::class.':index');
-    $group->get('/customers/showStoreForm', CustomerController::class.':showStoreForm');
+    $group->get('/customers/storeform', CustomerController::class.':showStoreForm');
     $group->post('/customers/store', CustomerController::class.':store');
+    $group->delete('/customers/updateform/{id}', CustomerController::class.':showUpdateForm');
+    $group->delete('/customers/update/{id}', CustomerController::class.':destroy');
+    $group->delete('/customers/destroy/{id}', CustomerController::class.':destroy');
+
 
     $group->get('/users', UserController::class .':index');
     $group->get('/users/storeform', UserController::class .':showStoreForm');

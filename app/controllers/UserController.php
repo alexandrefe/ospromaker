@@ -1,6 +1,5 @@
 <?php
 
-
 namespace app\controllers;
 
 use app\classes\Flash;
@@ -36,8 +35,6 @@ class UserController extends BaseController
     public function showStoreForm($request, $response, $args)
     {
         $messages = Flash::getAll();
-
-        var_dump($messages);
 
         return $this->getTwig()->render($response, $this->setView('admin/forms/users_store'), [
             'title' => 'OSPROMAKER - Cadastro de Usuários',

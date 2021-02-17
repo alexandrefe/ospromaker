@@ -1,7 +1,7 @@
 {% extends 'admin/master.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row mt-5">
         <div class="col-12 pb-3">
             <h3 class="title">Clientes Cadastrados</h3>
@@ -9,7 +9,7 @@
         </div>
     </div>   
 </div>      
-<div class="container mt-3">
+<div class="container-fluid mt-3">
   <div class="row">
     <div class="col-3">
       <form class="d-flex">
@@ -18,11 +18,11 @@
     </form>
     </div>
     <div class="col-3">
-      <a href="/admin/customers/showStoreForm">
+      <a href="/admin/customers/storeform">
         <button class="btn bg-gradient btn-dark"><i class="fas fa-user-plus"></i>&nbsp;Cadastrar Usuário</button>
       </a>
     </div>
-    <div class="col-12">
+    <div class="col-12 pt-5">
         {{ messages['message']['message']|message(messages['message']['alert'])|raw }}
     </div>
   </div>
@@ -58,11 +58,14 @@
             <td>{{customer.address}}</td>
             <td>{{customer.tel}}</td>
             <td>{{customer.email}}</td>
-            <td><a href="#">
-              <button class="btn btn-warning btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
-            </a></td>
-            <td><a href="#">
-              <button class="btn btn-danger btn-sm"><i class="fas fa-user-edit">&nbsp;</i>Editar</button>
+            <td>
+              <form action="/admin/customers/destroy/{{customer.id}}" method="post">
+                <input type="hidden" name="_METHOD" value="DELETE" />
+                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
+              </form>
+            </td>
+            <td><a href="/admin/customer/updateform/{{customer.id}}">
+              <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit">&nbsp;</i>Editar</button>
             </a></td>
           </tr>
           {% endfor %}
