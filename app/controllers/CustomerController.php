@@ -35,7 +35,7 @@ class CustomerController extends BaseController
     {
         $messages = Flash::getAll();
         
-        return $this->getTwig()->render($response, $this->setView('admin/forms/customer_store'), [
+        return $this->getTwig()->render($response, $this->setView('admin/forms/customers_store'), [
           'title' => 'OSPROMAKER - Clientes',
           'messages' => $messages,
         ]);
@@ -53,25 +53,88 @@ class CustomerController extends BaseController
           'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING),
        ];
 
-       $this->validate->required(['name', 'cpf', 'rg', 'birth_date', 'address', 'tel', 'email'])->exists($this->customer, ['name', 'cpf'], $values);
-       $errors = $this->validate->getErrors();
+        $this->validate->required(['name', 'cpf', 'rg', 'birth_date', 'address', 'tel', 'email'])->exists($this->customer, ['name', 'cpf'], $values);
+        $errors = $this->validate->getErrors();
 
-       if($errors) {
-         Flash::flashes($errors);
-         return redirect($response, '/admin/customers/storeform');
-       }
+        if ($errors) {
+            Flash::flashes($errors);
+            return redirect($response, '/admin/customers/storeform');
+        }
 
-       $created = $this->customer->create($values);
+        $created = $this->customer->create($values);
 
-       if($created) {
-           Flash::set('message', "Cliente {$values['name']}, cadastrado com sucesso!", 'success');
-           return redirect($response, '/admin/customers');
-       } else {
-           Flash::set('message', 'Ocorreu um erro ao cadastrar!', 'danger');
-           return redirect($response, '/admin/customers/storeform');
-       }
+        if ($created) {
+            Flash::set('message', "Cliente {$values['name']}, cadastrado com sucesso!", 'success');
+            return redirect($response, '/admin/customers');
+        } else {
+            Flash::set('message', 'Ocorreu um erro ao cadastrar!', 'danger');
+            return redirect($response, '/admin/customers/storeform');
+        }
 
-       return $response;
+        return $response;
+    }
+
+    public function showUpdateForm($request, $response, $args)
+    {
+        $id = filter_var($args['id'], FILTER_SANITIZE_NUMBER_INT);
+
+        $customer = $this->customer->findBy('id', $id);
+
+        if (!$customer) {
+            Flash::set('message', 'Usuário não existe!', 'danger');
+            return redirect($response, '/admin/customers');
+        }
+
+        $messages = Flash::getAll();
+
+        return $this->getTwig()->render($response, $this->setView('admin/forms/customers_update'), [
+            'title' => 'OSPROMAKER - Atualize o Cliente',
+            'customer' => $customer,
+            'messages' => $messages,
+        ]);
+    }
+
+    public function update($request, $response, $args)
+    {
+        $id = filter_var($args['id'], FILTER_SANITIZE_NUMBER_INT);
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $cpf = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_STRING);
+        $rg = filter_input(INPUT_POST, 'rg', FILTER_SANITIZE_STRING);
+        $birth_date = filter_input(INPUT_POST, 'birth_date', FILTER_SANITIZE_STRING);
+        $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
+        $tel = filter_input(INPUT_POST, 'tel', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+
+        $this->validate->required(['name', 'cpf', 'rg', 'birth_date', 'address', 'tel', 'email']);
+        $errors = $this->validate->getErrors();
+
+        if ($errors) {
+            Flash::flashes($errors);
+            return redirect($response, '/admin/customers/updateform/' . $id);
+        }
+
+        $updated = $this->customer->update(
+            [
+                'fields' => [
+                    'name' => $name,
+                    'cpf'  => $cpf,
+                    'rg'   => $rg,
+                    'birth_date' => $birth_date,
+                    'address'    => $address,
+                    'tel'        => $tel,
+                    'email'      => $email
+                ],
+                'where' => ['id' => $id],
+            ]
+        );
+
+        if ($updated) {
+            Flash::set('message', "Cliente {$name}, atualizado com sucesso!", 'success');
+            return redirect($response, '/admin/customers');
+        } else {
+            Flash::set('message', 'Ocorreu algum erro ao atualizar!', 'danger');
+            return redirect($response, '/admin/customers');
+        }
     }
 
     public function destroy($request, $response, $args)
@@ -80,7 +143,7 @@ class CustomerController extends BaseController
 
         $customer = $this->customer->findBy('id', $id);
 
-        if(!$customer) {
+        if (!$customer) {
             Flash::set('message', 'Cliente não existe!', 'danger');
             return redirect($response, '/admin/customers');
         }
@@ -95,5 +158,4 @@ class CustomerController extends BaseController
             return redirect($response, '/admin/customers', 'danger');
         }
     }
-
 }

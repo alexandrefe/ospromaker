@@ -1,0 +1,91 @@
+{% extends 'admin/master.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-column mt-5">
+        <div class="col-12 pb-1">
+            <h3 class="title">Atualize o cliente</h3>
+
+            {{ message['message'] }}
+
+            <hr>
+        </div>
+        <div class="col-12 pb-4">
+            <div class="rounded bg-info p-1 pt-2 pb-2">
+                <a href="/admin/customers" class="badge badge-danger" style="text-decoration: none;">
+                   <i class="fas fa-arrow-left"></i>&nbsp;<span>Voltar</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-6">
+
+            <form method="post" action="/admin/customers/update/{{customer.id}}">
+
+                <input type="hidden" name="_METHOD" value="PUT" />
+
+                <div class="input-group">
+                  {{ messages['name']['message']|message(messages['name']['alert'])|raw }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon1">Nome</span>
+                    <input type="text" name="name" value="{{customer.name}}" class="form-control" placeholder="" aria-label="Name" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="input-group">
+                    {{ messages['cpf']['message']|message(messages['cpf']['alert'])|raw }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon2">CPF</span>
+                    <input type="text" name="cpf" value="{{customer.cpf}}" class="form-control" placeholder="" aria-label="Cpf" aria-describedby="basic-addon2">
+                </div>
+
+                <div class="input-group">
+                    {{ messages['rg']['message']|message(messages['rg']['alert'])|raw }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon3">RG</span>
+                    <input type="text" name="rg" value="{{customer.rg}}" class="form-control" placeholder="" aria-label="RG" aria-describedby="basic-addon3">
+                </div>
+
+                <div class="input-group">
+                    {{ messages['birth_date']['message']|message(messages['birth_date']['alert'])|raw }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon4">Nascimento</span>
+                    <input type="date" name="birth_date" value="{{customer.birth_date}}" class="form-control" placeholder="" aria-label="Birth date" aria-describedby="basic-addon4">
+                </div>
+
+                <div class="input-group">
+                    {{ messages['address']['message']|message(messages['address']['alert'])|raw }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon5">Endereço</span>
+                    <input type="text" name="address" value="{{customer.address}}" class="form-control" placeholder="" aria-label="Address" aria-describedby="basic-addon5">
+                </div>
+
+              <div class="input-group">
+                  {{ messages['tel']['message']|message(messages['tel']['alert'])|raw }}
+              </div>
+              <div class="input-group mb-3">
+                  <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon5">Telefone</span>
+                  <input type="text" name="tel" value="{{customer.tel}}" class="form-control" placeholder="" aria-label="Telefone" aria-describedby="basic-addon5">
+              </div>
+
+            <div class="input-group">
+                {{ messages['email']['message']|message(messages['email']['alert'])|raw }}
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text bg-gradient bg-dark text-white" id="basic-addon2">Email</span>
+                <input type="email" name="email" value="{{customer.email}}" class="form-control" placeholder="" aria-label="Email" aria-describedby="basic-addon2">
+            </div>
+
+            <button type="submit" class="btn btn-success"> Atualizar </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

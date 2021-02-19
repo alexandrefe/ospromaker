@@ -12,7 +12,6 @@
         </div>
 
         <div class="d-flex flex-row justify-content-between">
-
             <div class="col-6">
                 {% for user in users %}
                 <ul class="list-group listagem mb-2">
@@ -22,14 +21,15 @@
                                 <span></span>
                             </div>
                             <div class="p-1">
-                                <form action="/admin/users/destroy/{{ user.id }}" method="post">
-                                    <input type="hidden" name="_METHOD" value="DELETE" />
-                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
+                                <form>
+                                    <button data-title = "Você tem certeza?" data-text = "Este usuário não tera mais acesso ao sistema!" 
+                                    data-redirect = "/admin/users" data-id="{{user.id}}" type="submit" class="botao-deletar btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </div>
                             <div class="p-1">
                                 <a href="/admin/users/updateform/{{ user.id }}">
-                                    <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit">&nbsp;</i>Editar</button>
+                                    <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit"></i></button>
                                 </a>
                             </div>
                         </div>
@@ -39,7 +39,6 @@
                     <li class="list-group-item list-group-item-action"><strong>CPF</strong>: {{ user.cpf }}</li>
                     <li class="list-group-item list-group-item-action"><strong>Cargo</strong>: {{ user.position }}</li>
                 </ul>
-
                 {% endfor %}
             </div>
 
@@ -48,11 +47,9 @@
                 <div class="col">
                     <div>
                         <nav class="navbar navbar-light bg-light">
-
                             <a href="/admin/users/storeform">
                                 <button class="btn bg-gradient btn-dark"><i class="fas fa-user-plus"></i>&nbsp;Cadastrar Usuário</button>
                             </a>
-
                         </nav>
                     </div>
                 </div>
@@ -60,16 +57,13 @@
                 <div class="col">
                     <div>
                         <nav class="navbar navbar-light bg-light">
-
                             <form class="d-flex">
                                 <input class="form-control me-2" type="search" placeholder="Pesquise por um usuário" aria-label="Search"/>
                                 <button class="btn bg-gradient btn-primary px-4"><i class="fas fa-search">&nbsp;</i></button>
                             </form>
-
                         </nav>
                     </div>
                 </div>
-
             </div>
 
         </div>

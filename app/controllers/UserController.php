@@ -88,7 +88,7 @@ class UserController extends BaseController
         $messages = Flash::getAll();
 
         return $this->getTwig()->render($response, $this->setView('admin/forms/users_update'), [
-            'title' => 'OSPROMAKER - Cadastro de Usuários',
+            'title' => 'OSPROMAKER - Atualize o Usuários',
             'user' => $user,
             'messages' => $messages,
         ]);

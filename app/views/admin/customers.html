@@ -22,17 +22,19 @@
         <button class="btn bg-gradient btn-dark"><i class="fas fa-user-plus"></i>&nbsp;Cadastrar Usuário</button>
       </a>
     </div>
+    {% if messages['message']['message']|message(messages['message']['alert']) %}
     <div class="col-12 pt-5">
         {{ messages['message']['message']|message(messages['message']['alert'])|raw }}
     </div>
+    {% endif %}
   </div>
   <div class="row mt-5">
     <div class="col">
-      <table class="table table-striped">
-        <thead class="table-dark">
+      <table class="table table-bordered border-warning table-striped">
+        <thead class="table-dark text-uppercase">
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">Info</th>
+            <th scope="col">Detalhes</th>
             <th scope="col">Nome</th>
             <th scope="col">CPF</th>
             <th scope="col">RG</th>
@@ -40,7 +42,7 @@
             <th scope="col">Endereço</th>
             <th scope="col">Telefone</th>
             <th scope="col">Email</th>
-            <th scope="col">Ações</th>
+            <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -48,9 +50,11 @@
           {% for customer in customers  %}
           <tr>
             <th scope="row">{{customer.id}}</th>
-            <th scope="row"><a href="#">
-              <i class="fas fa-plus"></i>&nbsp;Datalhes
-            </a></th>
+            <th scope="row">
+              <a href="#">
+                <button class="btn btn-secondary btn-sm text-light"><i class="fas fa-plus"></i></button>
+              </a>
+            </th>
             <td>{{customer.name}}</td>
             <td>{{customer.cpf}}</td>
             <td>{{customer.rg}}</td>
@@ -59,13 +63,14 @@
             <td>{{customer.tel}}</td>
             <td>{{customer.email}}</td>
             <td>
-              <form action="/admin/customers/destroy/{{customer.id}}" method="post">
-                <input type="hidden" name="_METHOD" value="DELETE" />
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt">&nbsp;</i>Excluir</button>
+              <form>
+                <button data-title = "Você tem certeza?" data-text = "Todas ordens de serviços referentes serão apagadas!" 
+                data-redirect = "/admin/customers" data-id="{{customer.id}}" type="submit" class="btn botao-deletar btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i></button>
               </form>
             </td>
-            <td><a href="/admin/customer/updateform/{{customer.id}}">
-              <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit">&nbsp;</i>Editar</button>
+            <td><a href="/admin/customers/updateform/{{ customer.id }}">
+              <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit"></i></button>
             </a></td>
           </tr>
           {% endfor %}
@@ -75,6 +80,7 @@
     </div>
   </div>
 </div>
+
 
 
 {% endblock %}

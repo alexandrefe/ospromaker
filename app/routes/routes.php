@@ -23,10 +23,9 @@ $app->group('/admin', function (RouteCollectorProxy $group) {
     $group->get('/customers', CustomerController::class.':index');
     $group->get('/customers/storeform', CustomerController::class.':showStoreForm');
     $group->post('/customers/store', CustomerController::class.':store');
-    $group->delete('/customers/updateform/{id}', CustomerController::class.':showUpdateForm');
-    $group->delete('/customers/update/{id}', CustomerController::class.':destroy');
+    $group->get('/customers/updateform/{id}', CustomerController::class.':showUpdateForm');
+    $group->put('/customers/update/{id}', CustomerController::class.':update');
     $group->delete('/customers/destroy/{id}', CustomerController::class.':destroy');
-
 
     $group->get('/users', UserController::class .':index');
     $group->get('/users/storeform', UserController::class .':showStoreForm');
