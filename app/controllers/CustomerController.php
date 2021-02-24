@@ -26,9 +26,25 @@ class CustomerController extends BaseController
 
         return $this->getTwig()->render($response, $this->setView('admin/customers'), [
           'title' => 'OSPROMAKER - Clientes',
+          'pagTitle' => 'Clientes',
           'customers' => $customers,
           'messages' => $messages,
         ]);
+    }
+
+    public function search($request, $response)
+    {
+        $searched = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING);
+
+        $customers = $this->customer->searchCostumer($searched);
+
+        return $this->getTwig()->render($response, $this->setView('admin/customers'), [
+            'title' => 'OSPROMAKER - Clientes',
+            'pagTitle' => 'Buscando Clientes',
+            'customers' => $customers,
+          ]);
+
+        return $response;
     }
 
     public function showStoreForm($request, $response, $args)
