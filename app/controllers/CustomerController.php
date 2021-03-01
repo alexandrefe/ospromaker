@@ -20,9 +20,14 @@ class CustomerController extends BaseController
 
     public function index($request, $response)
     {
+
+        $customersPaginate = $this->customer->setLimit(12)->setCurrentPage()->customers();
+        $links = $this->customer->renderLinks($customersPaginate['total']);
+
         $messages = Flash::getAll();
-        
         $customers = $this->customer->find(true);
+
+        var_dump($customersPaginate, $links);
 
         return $this->getTwig()->render($response, $this->setView('admin/customers'), [
           'title' => 'OSPROMAKER - Clientes',
@@ -34,13 +39,13 @@ class CustomerController extends BaseController
 
     public function search($request, $response)
     {
-        $searched = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING);
+        $searched = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
 
         $customers = $this->customer->searchCostumer($searched);
 
-        return $this->getTwig()->render($response, $this->setView('admin/customers'), [
+        return $this->getTwig()->render($response, $this->setView('admin/resultsearch_customers'), [
             'title' => 'OSPROMAKER - Clientes',
-            'pagTitle' => 'Buscando Clientes',
+            'pagTitle' => 'Clientes Encontrados',
             'customers' => $customers,
           ]);
 

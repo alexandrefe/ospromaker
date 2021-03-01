@@ -7,6 +7,13 @@
             <h3 class="title">{{pagTitle}}</h3>
             <hr>
         </div>
+        <div class="col-12 pb-4">
+          <div class="rounded bg-info p-1 pt-2 pb-2">
+              <a href="/admin/customers" class="badge badge-danger" style="text-decoration: none;">
+                 <i class="fas fa-arrow-left"></i>&nbsp;<span>Voltar</span>
+              </a>
+          </div>
+      </div>
     </div>   
 </div>      
 <div class="container-fluid mt-3">
@@ -16,11 +23,6 @@
         <input class="form-control me-2" name="search" type="search" placeholder="Pesquise pelo nome ou cpf" aria-label="Search"/>
         <button type="submit" class="btn bg btn-primary px-4"><i class="fas fa-search">&nbsp;</i></button>
     </form>
-    </div>
-    <div class="col-3">
-      <a href="/admin/customers/storeform">
-        <button class="btn bg-gradient btn-dark"><i class="fas fa-user-plus"></i>&nbsp;Cadastrar Usuário</button>
-      </a>
     </div>
     {% if messages['message']['message']|message(messages['message']['alert']) %}
     <div class="col-12 pt-5">
