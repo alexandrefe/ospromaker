@@ -21,36 +21,23 @@ class CustomerController extends BaseController
     public function index($request, $response)
     {
 
-        $customersPaginate = $this->customer->setLimit(12)->setCurrentPage()->customers();
-        $links = $this->customer->renderLinks($customersPaginate['total']);
+        $searched = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING)??1;
+
+        $customers = $this->customer->setLimit(12)->setCurrentPage()->customers($searched);
+
+        $links = $this->customer->renderLinks($customers['total']);
 
         $messages = Flash::getAll();
-        $customers = $this->customer->find(true);
-
-        var_dump($customersPaginate, $links);
 
         return $this->getTwig()->render($response, $this->setView('admin/customers'), [
           'title' => 'OSPROMAKER - Clientes',
           'pagTitle' => 'Clientes',
-          'customers' => $customers,
+          'customers' => $customers['registers'],
+          'links' => $links,
           'messages' => $messages,
         ]);
     }
 
-    public function search($request, $response)
-    {
-        $searched = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING);
-
-        $customers = $this->customer->searchCostumer($searched);
-
-        return $this->getTwig()->render($response, $this->setView('admin/resultsearch_customers'), [
-            'title' => 'OSPROMAKER - Clientes',
-            'pagTitle' => 'Clientes Encontrados',
-            'customers' => $customers,
-          ]);
-
-        return $response;
-    }
 
     public function showStoreForm($request, $response, $args)
     {

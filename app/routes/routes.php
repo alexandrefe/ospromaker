@@ -18,10 +18,10 @@ $app->post('/login', LoginController::class.':store');
 $app->get('/logout', LoginController::class.':destroy');
 
 $app->group('/admin', function (RouteCollectorProxy $group) {
+    
     $group->get('/', AdminController::class .':index');
 
     $group->get('/customers', CustomerController::class.':index');
-    $group->post('/customers/search', CustomerController::class.':search');
     $group->get('/customers/storeform', CustomerController::class.':showStoreForm');
     $group->post('/customers/store', CustomerController::class.':store');
     $group->get('/customers/updateform/{id}', CustomerController::class.':showUpdateForm');
@@ -34,6 +34,7 @@ $app->group('/admin', function (RouteCollectorProxy $group) {
     $group->get('/users/updateform/{id}', UserController::class.':showUpdateForm');
     $group->put('/users/update/{id}', UserController::class.':update');
     $group->delete('/users/destroy/{id}', UserController::class.':destroy');
+
 })->add($logged);
 
 

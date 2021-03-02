@@ -6,32 +6,36 @@ use Exception;
 
 class CustomerModel extends BaseModel
 {
-    public $table = 'customers';
 
-    public function searchCostumer($searched)
+    protected $table = 'customers';
+
+
+    public function customers($searched)
     {
+
         try {
+
             $prepared = $this->connection->prepare(
-                "SELECT * FROM {$this->table} WHERE customers.name LIKE :searchName OR customers.cpf LIKE :searchCpf "
+                "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->table} WHERE 
+                    customers.name LIKE :searchName 
+                        OR customers.cpf LIKE :searchCpf 
+                            LIMIT {$this->limit} OFFSET {$this->offset}"
             );
+
             $prepared->bindValue(':searchName', "%{$searched}%");
             $prepared->bindValue(':searchCpf', "%{$searched}%");
             $prepared->execute();
-            return $prepared->fetchAll();
-        } catch (PDOException $e) {
-            var_dump($e->getMessage());
-        }
-    }
-    public function paginate()
-    {
-        try {
-            $query = $this->connection->query('');
-            return [
-                'registers' => [],
-                'total' => 0,
+
+            return 
+            [
+                'registers' => $prepared->fetchAll(),
+                'total' => $this->connection->query('SELECT FOUND_ROWS()')->fetchColumn()
             ];
+
         } catch (Exception $e) {
+
             var_dump($e->getMessage());
         }
     }
+
 }
