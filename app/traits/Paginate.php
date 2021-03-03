@@ -33,7 +33,7 @@ trait Paginate
   public function totalPages($total)
   {
 
-    return floor($total / $this->limit);
+    return ceil($total / $this->limit);
 
   }
 

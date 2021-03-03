@@ -21,9 +21,9 @@ class CustomerController extends BaseController
     public function index($request, $response)
     {
 
-        $searched = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING)??1;
+        $searched = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING);
 
-        $customers = $this->customer->setLimit(12)->setCurrentPage()->customers($searched);
+        $customers = $this->customer->setLimit(10)->setCurrentPage()->customers($searched);
 
         $links = $this->customer->renderLinks($customers['total']);
 
