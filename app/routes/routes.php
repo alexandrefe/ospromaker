@@ -1,6 +1,7 @@
 <?php
 
 use app\controllers\HomeController;
+use app\controllers\ServiceOrderController;
 use app\controllers\CustomerController;
 use app\controllers\UserController;
 use app\controllers\AdminController;
@@ -20,6 +21,8 @@ $app->get('/logout', LoginController::class.':destroy');
 $app->group('/admin', function (RouteCollectorProxy $group) {
     
     $group->get('/', AdminController::class .':index');
+
+    $group->get('/serviceorders', ServiceOrderController::class.':index');
 
     $group->get('/customers', CustomerController::class.':index');
     $group->get('/customers/storeform', CustomerController::class.':showStoreForm');
