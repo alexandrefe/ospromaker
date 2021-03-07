@@ -17,14 +17,17 @@ class ServiceOrderController extends BaseController
 
 	public function index($request, $response)
 	{
+		$searched = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING);
 
-		$serviceOrders = $this->serviceOrder->find(true);
+		$serviceOrders = $this->serviceOrder->setLimit(10)->setCurrentPage()->serviceOrders($searched);
+		$links = $this->serviceOrder->renderLinks($serviceOrders['total']);
 
 		return $this->getTwig()->render($response, $this->setView('admin/serviceorders'), [
 
           'pagtitle' => 'OSPROMAKER - Ordem de Serviços',
           'subtitle' => 'Ordem de Serviços',
-          'serviceorders' => $serviceOrders,
+          'serviceorders' => $serviceOrders['registers'],
+          'links' => $links,
 
         ]);
 

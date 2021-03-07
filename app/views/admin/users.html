@@ -7,63 +7,58 @@
             <h3 class="title">Usuários Cadastrados</h3>
             <hr>
         </div>
-        <div class="col-12 pb-4">
+        {% if messages['message']['message'] %}
+        <div class="col-12 pb-3">
             {{ messages['message']['message']|message(messages['message']['alert'])|raw }}
+        </div>
+        {% endif %}
+         <div class="col-12 pb-3">
+            <div>
+                <nav class="navbar navbar-light bg-light">
+                    <a href="/admin/users/storeform">
+                        <button class="btn bg-gradient btn-dark"><i class="fas fa-user-plus"></i>&nbsp;Cadastrar Usuário</button>
+                    </a>
+                 </nav>
+            </div>
         </div>
 
         <div class="d-flex flex-row justify-content-between">
             <div class="col-6">
                 {% for user in users %}
-                <ul class="list-group listagem mb-2">
-                    <li class="list-group-item text-light bg-dark">
-                        <div class="d-flex justify-content-between">
-                            <div class="me-auto p-1">
-                                <span></span>
-                            </div>
-                            <div class="p-1">
-                                <form>
-                                    <button data-title = "Você tem certeza?" data-text = "Este usuário não tera mais acesso ao sistema!" 
-                                    data-redirect = "/admin/users" data-id="{{user.id}}" type="submit" class="botao-deletar btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </div>
-                            <div class="p-1">
-                                <a href="/admin/users/updateform/{{ user.id }}">
-                                    <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit"></i></button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action"><strong>Funcionário</strong>: {{ user.name }}</li>
-                    <li class="list-group-item list-group-item-action"><strong>E-mail</strong>: {{ user.email }}</li>
-                    <li class="list-group-item list-group-item-action"><strong>CPF</strong>: {{ user.cpf }}</li>
-                    <li class="list-group-item list-group-item-action"><strong>Cargo</strong>: {{ user.position }}</li>
-                </ul>
-                {% endfor %}
-            </div>
-
-            <div>
-
-                <div class="col">
-                    <div>
-                        <nav class="navbar navbar-light bg-light">
-                            <a href="/admin/users/storeform">
-                                <button class="btn bg-gradient btn-dark"><i class="fas fa-user-plus"></i>&nbsp;Cadastrar Usuário</button>
-                            </a>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div>
-                        <nav class="navbar navbar-light bg-light">
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Pesquise por um usuário" aria-label="Search"/>
-                                <button class="btn bg-gradient btn-primary px-4"><i class="fas fa-search">&nbsp;</i></button>
+                   <table class="table table-bordered border-light shadow mb-3 bg-body table-striped">
+                    <thead class="table-light text-uppercase">
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Cpf</th>
+                        <th scope="col">Cargo</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.cpf}}</td>
+                        <td>{{user.position}}</td>
+                        <td>
+                            <form>
+                             <button data-title = "Você tem certeza?" data-text = "Este usuário não tera mais acesso ao sistema!" 
+                             data-redirect = "/admin/users" data-id="{{user.id}}" type="submit" class="botao-deletar btn btn-danger btn-sm">
+                             <i class="fas fa-trash-alt"></i></button>
                             </form>
-                        </nav>
-                    </div>
-                </div>
+                        </td>
+                        <td>
+                             <a href="/admin/users/updateform/{{ user.id }}">
+                                    <button class="btn btn-warning btn-sm"><i class="fas fa-user-edit"></i></button>
+                             </a>
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                {% endfor %}
             </div>
 
         </div>
