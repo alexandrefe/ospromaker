@@ -1,5 +1,5 @@
-## ospromaker [Em desenvolvimento]
-> Sistema básico para Ordem de Serviços
+## OSPromaker [Em desenvolvimento]
+> Sistema fictício, básico para Ordens de Serviços
 
 Criado com a finalidade de colocar em prática conhecimento adquirido em faculdade, cursos e livros. 
 O mesmo foi criado utilizando Slim Framework, PDO e MariaDB. 
